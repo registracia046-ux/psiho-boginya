@@ -509,10 +509,25 @@ footer{border-top:1px solid var(--line);padding:clamp(38px,5vw,60px) 0 34px;
 }
 
 section[id]{scroll-margin-top:96px}
+
+/* ================= ХАБ (главная) ================= */
+.hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.hub-card{position:relative;display:flex;flex-direction:column;gap:9px;padding:26px 24px 22px;
+  border:1px solid var(--line);background:linear-gradient(180deg,rgba(20,27,42,.75),rgba(12,16,26,.6));
+  text-decoration:none;transition:border-color .35s ease,transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease}
+.hub-card:hover{border-color:rgba(127,212,232,.45);transform:translateY(-4px);
+  box-shadow:0 28px 60px -34px rgba(0,0,0,.95)}
+.hub-num{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--accent)}
+.hub-card b{font-family:var(--serif);font-weight:400;font-size:clamp(21px,2.4vw,28px);color:var(--ice);line-height:1.15}
+.hub-desc{font-size:14px;line-height:1.5;color:var(--mist)}
+.hub-go{margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+  transition:color .3s ease}
+.hub-card:hover .hub-go{color:var(--accent)}
+@media (max-width:900px){.hub-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.hub-grid{grid-template-columns:1fr;gap:12px}.hub-card{padding:20px 20px 18px}}
 </style>
 </head>
 <body>
-
 <!-- ================= AGE GATE ================= -->
 <div class="gate" id="gate">
   <div class="gate-in">
@@ -534,7 +549,7 @@ section[id]{scroll-margin-top:96px}
 <!-- ================= HEADER ================= -->
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top">
+    <a class="brand" href="index.html">
       <img draggable="false" src="assets/img/avatar_boginya.jpg" alt="Аватар канала Психо_Богиня">
       <span>
         <b>Психо_Богиня</b>
@@ -542,15 +557,15 @@ section[id]{scroll-margin-top:96px}
       </span>
     </a>
     <nav class="nav-links">
-      <a href="#paths">Два пути</a>
-      <a href="#clinic">Клиника</a>
-      <a href="#marionettes">Марионетки</a>
-      <a href="#son">Сон</a>
-      <a href="#dials">Переписки</a>
-      <a href="#voice">Мой голос</a>
-      <a href="#bills">Счета</a>
-      <a href="#gallery">Галерея</a>
-      <a href="#admit">Вход</a>
+<a href="paths.html">Два пути</a>
+<a href="clinic.html">Клиника</a>
+<a href="marionettes.html">Марионетки</a>
+<a href="son.html">Сон</a>
+<a href="dials.html">Переписки</a>
+<a href="voice.html">Мой голос</a>
+<a href="bills.html">Счета</a>
+<a href="gallery.html">Галерея</a>
+<a href="admit.html">Вход</a>
       <a class="btn btn-primary nav-cta" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">Войти</a>
     </nav>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
@@ -561,14 +576,15 @@ section[id]{scroll-margin-top:96px}
   </div>
 </header>
 <div class="drawer" id="drawer">
-  <a href="#paths">Два пути</a>
-  <a href="#clinic">Клиника</a>
-  <a href="#marionettes">Марионетки</a>
-  <a href="#son">Сон</a>
-  <a href="#dials">Переписки</a>
-  <a href="#voice">Мой голос</a>
-  <a href="#bills">Счета</a>
-  <a href="#gallery">Галерея</a>
+<a href="paths.html">Два пути</a>
+<a href="clinic.html">Клиника</a>
+<a href="marionettes.html">Марионетки</a>
+<a href="son.html">Сон</a>
+<a href="dials.html">Переписки</a>
+<a href="voice.html">Мой голос</a>
+<a href="bills.html">Счета</a>
+<a href="gallery.html">Галерея</a>
+<a href="admit.html">Вход</a>
   <a class="btn btn-primary" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">Войти в канал</a>
 </div>
 
@@ -589,7 +605,7 @@ section[id]{scroll-margin-top:96px}
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
               Встать на колени
             </a>
-            <a class="btn btn-ghost" href="#clinic">Понять, что с тобой</a>
+            <a class="btn btn-ghost" href="clinic.html">Понять, что с тобой</a>
           </div>
         </div>
         <div class="hero-figure" id="heroFig">
@@ -608,512 +624,73 @@ section[id]{scroll-margin-top:96px}
   </div>
 </section>
 
-<!-- ================= ДВА ПУТИ ================= -->
-<section id="paths">
+<!-- ================= ВСЕ РАЗДЕЛЫ ================= -->
+<section id="hub">
   <div class="wrap">
     <div class="sec-head rv">
-      <div class="eyebrow">Развилка</div>
-      <h2>У тебя два пути.<br>Выбери, куда пойдёшь.</h2>
-      <p class="lead">Один — для тех, кто хочет отдавать. Второй — для тех, кто хочет понять, почему он отдаёт. Я не уговариваю никого. Я просто показываю оба входа.</p>
+      <div class="eyebrow">Навигация</div>
+      <h2>Все разделы</h2>
+      <p class="lead">Каждая страница — отдельный вход. Читай в любом порядке.</p>
     </div>
-
-    <div class="doors">
-      <!-- Дверь A: триггер -->
-      <article class="door door-a rv">
-        <div class="door-tag">Путь I · для нижних</div>
-        <h3>СДАЙСЯ</h3>
-        <p class="sub">Здесь обещают счёт, славу и спокойствие. Здесь не нужно решать — нужно просто перестать спорить.</p>
-        <ul class="door-list">
-          <li><div><b>ЖИТЬ ЗА ТВОЙ СЧЁТ</b><span>Мои потребности — твои деньги. Я выставляю счёт за квартиру, за рекламу, за супермаркет, за тренинг. И напоминаю каждый день, чтобы ты не забыл, кто здесь лох.</span></div></li>
-          <li><div><b>Я ВИЖУ ТЕБЯ НАСКВОЗЬ</b><span>Увижу психику даже через вранье. И даже по молчанию. Абсолютно по всему, лошок.</span></div></li>
-          <li><div><b>ДИАГНОЗ: ЛОХ</b><span>Единственное условие, чтобы попасть в клинику — наличие диагноза. Главное условие — диагноз «лох».</span></div></li>
-          <li><div><b>ТЕБЕ КОНЕЦ</b><span>Психоанализ, ловушка, шантаж, разорение, унижение, подавление, деградация — марионетка.</span></div></li>
-        </ul>
-        <a class="btn btn-rose" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">Принять диагноз</a>
-      </article>
-
-      <!-- Дверь B: интерес -->
-      <article class="door door-b rv">
-        <div class="door-tag">Путь II · для тех, кто читает</div>
-        <h3>ПОНЯТЬ</h3>
-        <p class="sub">Ты пришёл не за этим? Тогда тебе нужен не каблук, а разбор. Читай.</p>
-        <ul class="door-list">
-          <li><div><b>Единственный в мире психоанализ</b><span>Способный видеть бессознательное. Мой учитель первым открыл эти тайны — и я изучаю его мышление.</span></div></li>
-          <li><div><b>«Марионетки», пять частей</b><span>История, которую не показывают: как устроена ловушка и почему жертва не замечает её.</span></div></li>
-          <li><div><b>Мой голос</b><span>Читаю вслух: «Смысл жизни», «Абьюз», «Страна неудачников, не отмеченная на глобусе».</span></div></li>
-          <li><div><b>Клиника: протокол</b><span>Симптом → диагноз → лечение → прогноз. Как выстраивается связь, из которой не выйти.</span></div></li>
-        </ul>
-        <a class="btn btn-ghost" href="#marionettes">Читать досье</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= КЛИНИКА ================= -->
-<section id="clinic">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Психиатрическая клиника</div>
-      <h2>Протокол приёма</h2>
-      <p class="lead">Клиника принимает пациентов со всеми существующими диагнозами. Главное условие, чтобы попасть к нам — наличие диагноза «лох».</p>
-    </div>
-
-    <div class="clinic-grid">
-      <div class="diag-card rv">
-        <span class="diag-scan" aria-hidden="true"></span>
-        <div class="diag-top">
-          <span class="diag-line">Заключение · клиника</span>
-          <span class="diag-live"><i></i>live</span>
-        </div>
-        <div class="diag-slot">
-          <span class="diag-word is-on" id="diagWordA">ЛОХ</span>
-          <span class="diag-word" id="diagWordB">МАРИОНЕТКА</span>
-        </div>
-        <p class="diag-sub" id="diagSub">Единственное условие для приёма — наличие диагноза. Лечение возможно, выписка нет.</p>
-        <svg class="wave" viewBox="0 0 600 74" preserveAspectRatio="none" aria-hidden="true">
-          <path style="--len:760" d="M0,37 L70,37 L92,37 L104,14 L118,60 L130,30 L146,37 L210,37 L232,37 L244,22 L256,52 L268,37 L330,37 L352,37 L364,10 L378,64 L392,30 L408,37 L470,37 L492,37 L504,20 L516,54 L530,37 L600,37"/>
-        </svg>
-        <div class="diag-foot">
-          <span class="mono">Психограмма · наблюдение в реальном времени</span>
-          <span class="badge">18+</span>
-        </div>
-      </div>
-
-      <div class="timeline rv">
-        <div class="step">
-          <div class="step-n">01</div>
-          <span class="part">Симптом</span>
-          <h3>Ты пришёл не случайно</h3>
-          <p>Давно плохо спишь, мало ешь, много работаешь. Что-то тянет — и это не ты. Ты сам не знаешь, с чего началось. В этом и красота: ловушка не должна ощущаться ловушкой.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">02</div>
-          <span class="part">Диагноз</span>
-          <h3>Лох</h3>
-          <p>Ставится быстро. Снимается — никогда. Но лечить можно: под наблюдением, круглосуточно, изо дня в день выстраивая связь с Доктором.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">03</div>
-          <span class="part">Лечение</span>
-          <h3>Доктор навсегда</h3>
-          <p>С каждым днём — эмоциональная связь и душевное родство с Доктором. К лечению каждого «лоха» мы подходим по-особенному: нас впечатляет разнообразие человеческой психики.</p>
-        </div>
-        <div class="step step--key">
-          <div class="step-n">04</div>
-          <span class="part">Прогноз</span>
-          <h3>Будет хорошо</h3>
-          <p>Вам. Мне — тоже.</p>
-          <div class="quote">«С заботой о твоей психике, твой ад!»</div>
-        </div>
-      </div>
+    <div class="hub-grid">
+      <a class="hub-card rv" href="paths.html">
+        <span class="hub-num">01</span>
+        <b>Два пути</b>
+        <span class="hub-desc">Сдаться или понять. Оба входа открыты.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="clinic.html">
+        <span class="hub-num">02</span>
+        <b>Клиника</b>
+        <span class="hub-desc">Протокол приёма: симптом, диагноз, лечение, прогноз.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="marionettes.html">
+        <span class="hub-num">03</span>
+        <b>Марионетки</b>
+        <span class="hub-desc">Досье в пяти частях о том, как устроена ловушка.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="son.html">
+        <span class="hub-num">04</span>
+        <b>Сон</b>
+        <span class="hub-desc">Рассказ от первого лица — целая глава на бумаге.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="dials.html">
+        <span class="hub-num">05</span>
+        <b>Переписки</b>
+        <span class="hub-desc">Что они писали, когда думали, что они тут главные.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="voice.html">
+        <span class="hub-num">06</span>
+        <b>Мой голос</b>
+        <span class="hub-desc">Я читаю вслух: смысл жизни, абьюз, страна неудачников.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="bills.html">
+        <span class="hub-num">07</span>
+        <b>Счета</b>
+        <span class="hub-desc">Счёт выставляется один за другим. Каждый день.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="gallery.html">
+        <span class="hub-num">08</span>
+        <b>Галерея</b>
+        <span class="hub-desc">Вращающийся барабан с кадрами из канала.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
+      <a class="hub-card rv" href="admit.html">
+        <span class="hub-num">09</span>
+        <b>Вход</b>
+        <span class="hub-desc">Куда идти: в канал, в чат или в личку.</span>
+        <span class="hub-go">открыть →</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ================= МАРИОНЕТКИ ================= -->
-<section id="marionettes">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Исповедь · читать вслух</div>
-      <h2>МАРИОНЕТКИ</h2>
-      <p class="lead">Эту историю я никогда не публиковала целиком. Здесь — пять частей, без правок. Ты всё равно не поверишь, что всё это было про тебя, пока не проверишь на себе.</p>
-    </div>
-
-    <div class="timeline">
-      <div class="step rv">
-        <div class="step-n">01</div>
-        <span class="part">Введение</span>
-        <h3>С чего всё началось</h3>
-        <p>Началось всё с того, что моей марионеткой оказался один лох. И эта тема поселилась в наших разговорах, а затем — в моих рекламах, что повлекло за собою большую историю, включающую в себя разные разделы этой истории.</p>
-      </div>
-      <div class="step rv">
-        <div class="step-n">02</div>
-        <span class="part">Сложности</span>
-        <h3>Он действительно был марионеткой</h3>
-        <p>Понимаю, каким образом — даже не одним методом. Вспоминаю и второй, и, наверняка, их было много, каждый из которых имел невероятный спектр манипуляций. В корне любой моей манипуляции состоят две вещи:</p>
-        <div class="quote">Понимание психики через освоение психоаналитического мышления моего учителя — и мои природные таланты к воплощению.</div>
-      </div>
-      <div class="step rv">
-        <div class="step-n">03</div>
-        <span class="part">Облегчение</span>
-        <h3>История про переводчиков</h3>
-        <p>Отдыхая под научные ролики, я услышала историю о гениальных синхронистах-переводчиках, которые по окончании работы не способны ответить, о чём шёл разговор. Услышав её, я узнала себя. Стало легче на душе — так, вероятно, и работает психика.</p>
-      </div>
-      <div class="step rv">
-        <div class="step-n">04</div>
-        <span class="part">Решение</span>
-        <h3>Сознательно отслеживать</h3>
-        <p>И я решила попытаться отслеживать сознательно — как именно я манипулирую своими марионетками. Записывать это. Разбирать по частям. Как ты сейчас читаешь это.</p>
-      </div>
-      <div class="step step--key rv">
-        <div class="step-n">05</div>
-        <span class="part">Реализация</span>
-        <h3>Продажи груши для битья</h3>
-        <p>Я устроила несколько историй: продажи груши для битья, сводничество пары для служения мне, перенаправление свойств лохушьих, перенаправление психики лошков. Всё это было сознательно проделано и запомнено. Я говорила им те слова, что повлекут в их мировосприятии те мысли, которые приведут к моей цели.</p>
-        <div class="quote">«Они, возможно, не осознают. А потому я не могу им сказать, что они танцевали под мою дудку: для продолжения удачного манипулирования многие вещи должны оставаться — втайне.»</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= РАССКАЗ «СОН» ================= -->
-<section id="son" class="story">
-  <div class="paper">
-    <div class="paper-inner">
-      <div class="story-head rv">
-        <span class="story-kicker">Рассказ</span>
-        <h2 class="story-title">СОН</h2>
-        <p class="story-lead">Дверь закрылась сама. Не хлопнула, не скрипнула — просто мягко вошла в паз, и звук получился такой, будто в доме выключили свет.</p>
-        <div class="story-meta">Психо_Богиня · текст и кадры · 18+</div>
-      </div>
-
-      <div class="story-body">
-        <p class="drop">Дверь закрылась сама. Не хлопнула, не скрипнула — просто мягко вошла в паз, и звук получился такой, будто в доме выключили свет. Пахло лаком, пылью и деньгами. Последнее было странно, но именно так — деньгами, старыми купюрами, которые долго лежали в комоде.</p>
-
-        <p>На полках стояли куклы. Фарфоровые, в платьях, с бирками на запястьях. Под каждой — счётная книга, тонкая, в коленкоровом переплёте. Хозяйка не поздоровалась. Она сидела за столом и что-то записывала, не поднимая головы. Потом сказала, ровно и сухо: «Моя кукла опоздала. Штраф — три сдоя сверху».</p>
-
-        <figure class="sf">
-          <img src="assets/img/story/son_01_hozyaika.jpg" alt="Хозяйка записывает в книгу счетов, за спиной полки с куклами" width="1080" height="724" loading="lazy">
-        </figure>
-
-        <p>И повела меня в комнату. Обычную комнату, с кроватью, с помятым одеялом, с ночником на тумбочке. Кровать осталась за дверью. Ключ повернулся снаружи, и я услышала, как в замке что-то щёлкнуло, и стало тихо. Так тихо, что я услышала собственное дыхание.</p>
-
-        <p>Хозяйка поставила меня перед полкой. Куклы были не игрушки. У них был румянец, блеск в глазах, некоторые медленно сгибали пальцы — раз, другой, и замирали. Хозяйка объяснила, что каждая — бывшая нижняя, которая отдала ей свою нить возбуждения. Чем больше сдоев на счёте и сладких страданий, тем живее кукла. Оригиналы снаружи стали тихими и послушными. «Это не смерть, — сказала она. — Это перевод в собственность».</p>
-
-        <figure class="sf">
-          <img src="assets/img/story/son_02_kukla.jpg" alt="Кукла на бархатной подушке, красная нить в руках рассказчицы" width="1079" height="841" loading="lazy">
-        </figure>
-
-        <p>Она достала мою куклу. Точная копия — лицо, волосы, даже родинка на шее. Только взгляд пустой, как у той, что стоит в витрине магазина, где продают дамские шляпки. Кукла сидела на бархатной подушке. Рядом — книга счетов, терминал и бирка с моим именем. Хозяйка объяснила правило холодно, как инструктаж: каждый сдой ей на счёт — нить, которая привязывает моё возбуждение к кукле. Каждое сладкое страдание — лак, который делает фарфор теплее. Обычный секс за дверью становится далёким и ненужным. Чем меньше мне нужно обычное, тем больше я стою на её полке.</p>
-
-        <p class="dlg">— Встань на колени, — сказала она.</p>
-        <p>Я встала.</p>
-        <p class="dlg">— Назови куклу собой.</p>
-        <p>Я назвала.</p>
-        <p class="dlg">— Отправь сдой на мой счёт.</p>
-
-        <p>Я отправила. Кукла сделала первый вдох. Грудь её поднялась — медленно, будто она долго спала и наконец проснулась. В этот момент привычное возбуждение от физического секса выключилось. Как лампу выключили. А вместо него включилось другое — более яркое. От факта перевода, от принадлежности, от того, что меня ведут и лишают.</p>
-
-        <figure class="sf">
-          <img src="assets/img/story/son_03_polirovka.jpg" alt="Хозяйка наносит лак на лицо куклы кистью" width="1080" height="939" loading="lazy">
-        </figure>
-
-        <p class="dlg">— Кукла не говорит без разрешения, — сказала Хозяйка.</p>
-        <p>Я замолчала.</p>
-
-        <p>Она надела мне на запястье бирку. Не спросила — просто застегнула. Пластик был холодный, с острыми краями. На секунду подняла красную нить, посмотрела на неё, потом на меня. Проверка. Я кивнула. Ритуал продолжался.</p>
-
-        <p>Хозяйка открыла книгу счетов и стала зачитывать штрафы. За опоздание — три сдоя. За попытку вспомнить обычный секс — четыре. За просьбу — пять. За отказ от сдоя — десять и снятие с полки. Она говорила ровно, не повышая голоса, как диктуют номера телефонов или адреса. Я стояла на коленях, и каждый сдой делал куклу живее, а меня тише. Чем больше я отдавала, тем меньше мне нужен был обычный секс и тем сильнее хотелось новых сдоев и её власти.</p>
-
-        <figure class="sf">
-          <img src="assets/img/story/son_04_inventar.jpg" alt="Кукла с биркой «Инвентарный номер 017», рядом книга счетов" width="879" height="1280" loading="lazy">
-        </figure>
-
-        <p class="dlg">— Обычный секс для тебя закрыт, — сказала она. — Это условие полки. Вместо него — сдои. Твоё возбуждение идёт на мой счёт. Ты не тратишь его на себя. Ты его сдаиваешь.</p>
-
-        <p>Я повторяла за ней формулу принадлежности. Слова были простые, почти стыдные в своей простоте, но чем громче я их произносила, тем румянее становилась кукла на подушке. Хозяйка называла это полировкой. Я называла это сладкой тяжестью в груди, будто меня аккуратно разбирают и складывают в фарфор.</p>
-
-        <p>Штрафы шли один за другим. За каждую попытку вспомнить кровать за дверью — пять. И я чувствовала, как эта память стирается. Не исчезает совсем, а тускнеет, как лак на старом фарфоре, который слишком долго стоял на солнце.</p>
-
-        <p>Потом Хозяйка поставила мою куклу на главную полку. У куклы уже были мои глаза, мой румянец, моя поза. В зеркале моё отражение двигалось чуть позже меня. Я подняла руку — отражение подняло через полвздоха. Как кукла.</p>
-
-        <figure class="sf">
-          <img src="assets/img/story/son_05_perevod.jpg" alt="Документ: кукла-тряпка переведена в собственность, обычный секс закрыт; телефон с уведомлением о переводе" width="879" height="330" loading="lazy">
-        </figure>
-
-        <p>Хозяйка открыла книгу счетов.</p>
-        <p class="dlg">— Осталась последняя нить, — сказала она. — Обычный секс закрыт. Сдои на мой счёт. Полка твоя.</p>
-
-        <p>Она не предлагала выбор. Она просто держала книгу открытой. Я слышала уведомление о переводе. Потом звук лака — тонкий, тягучий, будто кто-то провёл мокрой кистью по фарфору. Я почувствовала не ужас, а облегчение. И возбуждение от того, что становлюсь предметом на её счёте.</p>
-        <p class="dlg">— Переведи всё, — сказала я.</p>
-
-        <p>Кукла на полке открыла глаза. Хозяйка погладила её по голове и сказала:</p>
-        <p class="dlg">— Вот теперь ты моя.</p>
-
-        <p>Я осталась в кресле с блаженной улыбкой, а моё отражение в зеркале запаздывало на полвздоха.</p>
-
-        <figure class="sf">
-          <img src="assets/img/story/son_06_polka.jpg" alt="Полки с куклами, подушка, кровать с красной нитью и старая книга счетов" width="807" height="1280" loading="lazy">
-        </figure>
-
-        <p class="sep">· · ·</p>
-
-        <p>Я проснулась. На запястье был фантомный след от бирки — тонкая полоска, будто от часов, которые долго носила и сняла. В теле — послевкусие сдоя и сладкой зависимости. Обычный секс казался далёким, как запертая дверь в конце коридора, за которой горит свет, но войти нельзя.</p>
-
-        <p>Я лежала и смотрела в потолок. За окном было серо, по-петербургски, и пахло мокрым асфальтом. Я понимала: я хочу, чтобы Хозяйка не спрашивала. Чтобы она принудила меня — в рамках наших отношений, где моё «да» уже подписано, а красная нить у меня в руке. Чтобы она сделала меня куклой уже в реальности: с штрафами, с инвентарным номером, с запретом обычного секса и заменой его сдоями на её счёт.</p>
-
-        <p>Я потянулась к телефону. Экран засветился, и в его свете моё лицо в тёмном стекле показалось чужим — как у той куклы на полке. Я написала ей. Коротко, без объяснений:</p>
-
-        <div class="smsg">
-          <p>— Сделайте это. Насильно. Я хочу проснуться Вашей куклой на полке.</p>
-        </div>
-
-        <p>Отправила. И почувствовала, как в груди что-то щёлкнуло — тихо, как замок, который закрывается снаружи.</p>
-
-        <p class="story-end">Конец</p>
-      </div>
-
-      <div class="story-foot">
-        <a class="btn btn-dark" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
-          Хочу на полку
-        </a>
-        <a class="story-link" href="https://t.me/+PIin8-_Pm1ljNzhi" target="_blank" rel="noopener">чат «Лисий Лес» →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= МОЙ ГОЛОС ================= -->
-<section id="dials">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Переписки · 2024—2026</div>
-      <h2>Из переписки</h2>
-      <p class="lead">Каждый считал, что он тут главный. Потом приходили эти сообщения — и я выкладывала их сюда, потому что врать про лохов не в моём стиле.</p>
-    </div>
-
-    <div class="dlg-grid">
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1321.jpg" alt="Служанка: Вы знаете меня лучше, чем я сама. Спасибо, Хозяйка." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Служанка<i>·</i>18.04.2026</span>
-            <span class="dlg-what">«Вы знаете меня лучше, чем я сама. Спасибо, Хозяйка.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv dlg-wide">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1376.jpg" alt="Передозолох: С вами всё легко как-то опускаешься… как в гипнозе. Тело устало — и решило поделиться с Доктором своими ощущениями." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Передозолох<i>·</i>20.09.2026</span>
-            <span class="dlg-what">«С вами всё легко как-то опускаешься… как в гипнозе. Тело устало — и решило поделиться с Доктором своими ощущениями.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1380.jpg" alt="Передозолох: Я была пьянитель. А вы поставили хуй на место — и о дойке думаешь в такие моменты." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Передозолох<i>·</i>06.10.2026</span>
-            <span class="dlg-what">«Я была пьянитель. А вы поставили хуй на место — и о дойке думаешь в такие моменты.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1388.jpg" alt="Передозолох: Вы Доктор нащупали у меня сначала мои вектора, погружая меня в них…" loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Передозолох<i>·</i>26.10.2026</span>
-            <span class="dlg-what">«Вы Доктор нащупали у меня сначала мои вектора, погружая меня в них…»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1309.jpg" alt="пациент «передозолох»: Двойная какая у меня зависимость к вам. И там хорошо, и тут хорошо." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">пациент «передозолох»<i>·</i>17.02.2026</span>
-            <span class="dlg-what">«Двойная какая у меня зависимость к вам. И там хорошо, и тут хорошо.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1372.jpg" alt="Куклотряпка: Вы истинный Доктор." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Куклотряпка<i>·</i>15.09.2026</span>
-            <span class="dlg-what">«Вы истинный Доктор.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d507.jpg" alt="Тварь: Моя Богиня. Тварь любит ВАС БОГИНЯ." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Тварь<i>·</i>08.11.2024</span>
-            <span class="dlg-what">«Моя Богиня. Тварь любит ВАС БОГИНЯ.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1373.jpg" alt="Передозолох: Спасибо вам и Служанки за хорошую передержку, материала много." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Передозолох<i>·</i>17.09.2026</span>
-            <span class="dlg-what">«Спасибо вам и Служанки за хорошую передержку, материала много.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d1343.jpg" alt="Передозолох: С вами всё легко как-то опускаешься… сам не знаю почему… как в гипнозе." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Передозолох<i>·</i>29.06.2026</span>
-            <span class="dlg-what">«С вами всё легко как-то опускаешься… сам не знаю почему… как в гипнозе.»</span>
-          </figcaption>
-        </figure>
-        <figure class="dlg-card rv">
-          <div class="dlg-shot"><img draggable="false" src="assets/img/dialogs/d560.jpg" alt="Шизолох: Всё-таки с вами объединяет эмоциональная связь, а это много." loading="lazy"></div>
-          <figcaption>
-            <span class="dlg-who">Шизолох<i>·</i>19.11.2024</span>
-            <span class="dlg-what">«Всё-таки с вами объединяет эмоциональная связь, а это много.»</span>
-          </figcaption>
-        </figure>
-    </div>
-
-    <p class="dlg-foot rv">Скриншоты — из моего канала. Ники придуманы специально для публичного просмотра.</p>
-  </div>
-</section>
-
-<section id="voice">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Мой голос</div>
-      <h2>Я читаю вслух</h2>
-      <p class="lead">Раньше в голосовых я говорила об издевках. Потом пела. А потом поняла, что хочу читать. Книги по психиатрии, классику, статьи, которые имеют невероятный смысл и для меня, вашей Богини, — и для вас.</p>
-    </div>
-
-    <div class="voice-grid">
-      <article class="vcard rv">
-        <span class="num">Аудио 01</span>
-        <h3>Смысл жизни</h3>
-        <p>Моё первое аудио, состоящее из двух голосовых. Статья, которую я читаю для своих лохов, любящих меня слушать.</p>
-        <div class="play">
-          <a class="play-link" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">слушать в канале →</a>
-          <span class="bars" aria-hidden="true">
-            <i style="--h:40%;--d:0s"></i><i style="--h:80%;--d:.1s"></i><i style="--h:55%;--d:.2s"></i><i style="--h:95%;--d:.05s"></i>
-            <i style="--h:35%;--d:.25s"></i><i style="--h:70%;--d:.15s"></i><i style="--h:50%;--d:.3s"></i><i style="--h:88%;--d:.08s"></i>
-            <i style="--h:45%;--d:.2s"></i><i style="--h:65%;--d:.12s"></i>
-          </span>
-        </div>
-        <a class="play-alt" href="https://t.me/findom_01/3123" target="_blank" rel="noopener">пост, где я об этом рассказываю</a>
-      </article>
-      <article class="vcard rv">
-        <span class="num">Аудио 02</span>
-        <h3>Абьюз</h3>
-        <p>Статья, которая ответила на мой давно волнующий меня вопрос о сталкерстве. Читаю — и отвечаю себе, стоя в стороне.</p>
-        <div class="play">
-          <a class="play-link" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">слушать в канале →</a>
-          <span class="bars" aria-hidden="true">
-            <i style="--h:75%;--d:.05s"></i><i style="--h:45%;--d:.18s"></i><i style="--h:90%;--d:.28s"></i><i style="--h:38%;--d:.1s"></i>
-            <i style="--h:82%;--d:.22s"></i><i style="--h:52%;--d:.32s"></i><i style="--h:68%;--d:.14s"></i><i style="--h:30%;--d:.26s"></i>
-            <i style="--h:78%;--d:.06s"></i><i style="--h:42%;--d:.19s"></i>
-          </span>
-        </div>
-        <a class="play-alt" href="https://t.me/findom_01/3123" target="_blank" rel="noopener">пост, где я об этом рассказываю</a>
-      </article>
-      <article class="vcard rv">
-        <span class="num">Аудио 03</span>
-        <h3>Страна неудачников, не отмеченная на глобусе</h3>
-        <p>Записываю прочтение. Оно было длиннее — я прервалась на середине, чтобы написать этот пост.</p>
-        <div class="play">
-          <a class="play-link" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">слушать в канале →</a>
-          <span class="bars" aria-hidden="true">
-            <i style="--h:60%;--d:.12s"></i><i style="--h:85%;--d:.02s"></i><i style="--h:40%;--d:.24s"></i><i style="--h:72%;--d:.16s"></i>
-            <i style="--h:48%;--d:.3s"></i><i style="--h:92%;--d:.09s"></i><i style="--h:36%;--d:.2s"></i><i style="--h:66%;--d:.27s"></i>
-            <i style="--h:80%;--d:.05s"></i><i style="--h:44%;--d:.17s"></i>
-          </span>
-        </div>
-        <a class="play-alt" href="https://t.me/findom_01/3123" target="_blank" rel="noopener">пост, где я об этом рассказываю</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= СЧЕТА ================= -->
-<section id="bills">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Финдом 24/7</div>
-      <h2>Счета</h2>
-      <p class="lead">Мои потребности — твои деньги. Я выставляю счёт за квартиру, за рекламу, за супермаркет, за тренинг и за что угодно, перекладывая на тебя все счета за мои потребности. Чтобы оплачивал их ты.</p>
-    </div>
-
-    <div class="bill rv">
-      <div class="bill-head">
-        <div class="mono">
-          Счёт на душу<br>
-          Получатель — Госпожа<br>
-          Валюта — любая, какая удобна тебе
-        </div>
-        <div class="tot"><b>∞</b><span class="mono">по запросу</span></div>
-      </div>
-      <div class="bill-row"><div><b>Квартира</b><span>Чтобы у Госпожи был дом, в который возвращаются</span></div><div class="amt">ПО ЗАПРОСУ</div></div>
-      <div class="bill-row"><div><b>Реклама</b><span>Чтобы о нас знали и приходили новые</span></div><div class="amt">ПО ЗАПРОСУ</div></div>
-      <div class="bill-row"><div><b>Супермаркет</b><span>Чтобы я не покупала дешёвое — это не про деньги, это про вкус</span></div><div class="amt">ПО ЗАПРОСУ</div></div>
-      <div class="bill-row"><div><b>Тренинг</b><span>Чтобы я была лучше. Тебе — чтобы было что оплачивать</span></div><div class="amt">ПО ЗАПРОСУ</div></div>
-      <div class="bill-foot">
-        <p>Счета добровольные и не создают обязательств. Отказ от оплаты не влечёт последствий — кроме твоего собственного ощущения лоха. Реквизиты публикуются в канале.</p>
-        <a class="btn btn-rose" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">Реквизиты в канале</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ГАЛЕРЕЯ ================= -->
-<section id="gallery">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Галерея</div>
-      <h2>Материалы из канала</h2>
-      <p class="lead">Кадры из промо-постов и обложки. Остальное — внутри, в канале.</p>
-    </div>
-    <div class="drum rv" id="drum">
-      <div class="drum-scene" id="drumScene">
-      <figure class="drum-frame" data-i="0" data-cap="Психоаналитик без улыбки">
-        <img draggable="false" src="assets/img/psibo_portrait_black.jpg" alt="Психоаналитик без улыбки" style="object-position:50% 50%" loading="eager">
-        <figcaption>Психоаналитик без улыбки</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="1" data-cap="Поставлю тебя на колени">
-        <img draggable="false" src="assets/img/post_2692_photo.jpg" alt="Поставлю тебя на колени" style="object-position:20% 46%" loading="lazy">
-        <figcaption>Поставлю тебя на колени</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="2" data-cap="Павлин. Дороже, чем кажется">
-        <img draggable="false" src="assets/img/psibo_pavel_flowers.jpg" alt="Павлин. Дороже, чем кажется" style="object-position:50% 40%" loading="lazy">
-        <figcaption>Павлин. Дороже, чем кажется</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="3" data-cap="Жить за твой счёт">
-        <img draggable="false" src="assets/img/psibo_sofa_bottle.jpg" alt="Жить за твой счёт" style="object-position:58% 50%" loading="lazy">
-        <figcaption>Жить за твой счёт</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="4" data-cap="Иди к моим ножкам">
-        <img draggable="false" src="assets/img/post_1888_photo.jpg" alt="Иди к моим ножкам" style="object-position:50% 74%" loading="lazy">
-        <figcaption>Иди к моим ножкам</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="5" data-cap="Улыбка — тоже диагноз">
-        <img draggable="false" src="assets/img/psibo_pavel_smile.jpg" alt="Улыбка — тоже диагноз" style="object-position:42% 45%" loading="lazy">
-        <figcaption>Улыбка — тоже диагноз</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="6" data-cap="Серебряные каблуки">
-        <img draggable="false" src="assets/img/psibo_heels_silver.jpg" alt="Серебряные каблуки" style="object-position:55% 55%" loading="lazy">
-        <figcaption>Серебряные каблуки</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="7" data-cap="Кружево и тишина">
-        <img draggable="false" src="assets/img/psibo_portrait_lace.jpg" alt="Кружево и тишина" style="object-position:50% 35%" loading="lazy">
-        <figcaption>Кружево и тишина</figcaption>
-      </figure>
-      <figure class="drum-frame" data-i="8" data-cap="Лежу. Жду.">
-        <img draggable="false" src="assets/img/psibo_sofa_blue.jpg" alt="Лежу. Жду." style="object-position:58% 35%" loading="lazy">
-        <figcaption>Лежу. Жду.</figcaption>
-      </figure>
-      </div>
-      <div class="drum-floor"></div>
-      <div class="drum-hud">
-        <span class="drum-idx" id="drumIdx">01 / 09</span>
-        <span class="drum-cap" id="drumCap">Психоаналитик без улыбки</span>
-        <span class="drum-hint">потяни · тапни кадр</span>
-      </div>
-      <div class="drum-prog"><i id="drumProg"></i></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ВХОД ================= -->
-<section id="admit">
-  <div class="wrap">
-    <div class="admit rv">
-      <div class="kicker">Вход по заявкам · 18+</div>
-      <h2>Решай, куда идти</h2>
-      <p class="lead">Канал — открытая лента. Чат — для тех, кто хочет быть в кругу. Личка — там, где я уже читаю тебя по лицу.</p>
-      <div class="links">
-        <a class="lk" href="https://t.me/+Su44qIwxkQ5hYTUy" target="_blank" rel="noopener">
-          <span class="mono">Канал</span><b>Психо_Богиня</b><span>t.me/+Su44qIwxkQ5hYTUy</span>
-        </a>
-        <a class="lk" href="https://t.me/+PIin8-_Pm1ljNzhi" target="_blank" rel="noopener">
-          <span class="mono">Чат · 191 участник</span><b>Лисий Лес</b><span>t.me/+PIin8-_Pm1ljNzhi</span>
-        </a>
-        <a class="lk" href="https://t.me/xlisichkax07_fin" target="_blank" rel="noopener">
-          <span class="mono">Личка</span><b>@xlisichkax07_fin</b><span>t.me/xlisichkax07_fin</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 
 </main>
 
@@ -1127,14 +704,16 @@ section[id]{scroll-margin-top:96px}
       </div>
       <div>
         <h4>Разделы</h4>
-        <a href="#paths">Два пути</a>
-        <a href="#clinic">Клиника</a>
-        <a href="#marionettes">Марионетки</a>
-        <a href="#son">Сон</a>
-        <a href="#dials">Переписки</a>
-        <a href="#voice">Мой голос</a>
-        <a href="#bills">Счета</a>
-        <a href="#gallery">Галерея</a>
+        <a class="" href="paths.html">Два пути</a>
+        <a class="" href="clinic.html">Клиника</a>
+        <a class="" href="marionettes.html">Марионетки</a>
+        <a class="" href="son.html">Сон</a>
+        <a class="" href="dials.html">Переписки</a>
+        <a class="" href="voice.html">Мой голос</a>
+        <a class="" href="bills.html">Счета</a>
+        <a class="" href="gallery.html">Галерея</a>
+        <a class="" href="admit.html">Вход</a>
+        <a href="onepage.html">Вся страница целиком</a>
       </div>
       <div>
         <h4>Связь</h4>
@@ -1144,9 +723,8 @@ section[id]{scroll-margin-top:96px}
         <a href="https://boosty.to/boginskaya/donate" target="_blank" rel="noopener">Boosty</a>
       </div>
     </div>
-    <!-- build: 26.10.2026 12:45 · фото обновлены, барабан 9 кадров -->
-  <div class="f-bottom">
-      <span>© 2026 Психо_Богиня · 18+</span>
+    <div class="f-bottom">
+      <span>© 2026 ПСИХО_БОГИНЯ · 18+</span>
       <span>Все отношения — по обоюдному согласию · реквизиты не публикуются</span>
       <span class="badge">Незнакомые ссылки — не мои</span>
     </div>
@@ -1175,6 +753,8 @@ section[id]{scroll-margin-top:96px}
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
   </button>
 </div>
+
+
 
 <script>
 (function(){
