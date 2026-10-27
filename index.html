@@ -152,7 +152,8 @@ body>header{position:sticky;top:0;z-index:90;background:rgba(7,10,20,.97);
 .hero-figure{position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line);
   background:var(--deep);box-shadow:0 50px 100px -50px rgba(0,0,0,.95)}
 .hero-figure img{width:100%;height:100%;object-fit:cover;object-position:56% 30%;
-  transform:scale(1.06);transition:transform .9s cubic-bezier(.2,.7,.3,1)}
+  transform:scale(1.06);transition:transform .9s cubic-bezier(.2,.7,.3,1)}.hero-figure--video img{object-position:50% 0%;transform:scale(1.02);transition:none}
+.hero-figure video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%;transform:scale(1.02);z-index:1}
 .hero-figure::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 45%,rgba(7,10,20,.82));pointer-events:none}
 .hero-stamp{position:absolute;left:16px;bottom:16px;z-index:2;font-family:var(--mono);font-size:11px;
@@ -393,6 +394,7 @@ html.js .rv.in{opacity:1;transform:none}
   .hero-grid{grid-template-columns:1fr;gap:30px;margin-top:18px}
   .hero-copy{align-self:auto}
   .hero-figure{aspect-ratio:16/11;order:-1}
+  .hero-figure--video{aspect-ratio:4/5}
   .hero-figure img{object-position:50% 32%}
   .clinic-grid{grid-template-columns:1fr}
   .voice-grid{grid-template-columns:1fr 1fr}
@@ -447,6 +449,7 @@ html.js .rv.in{opacity:1;transform:none}
   .gate h2{font-size:24px;margin:9px 0 7px}
 }
 @media (prefers-reduced-motion:reduce){
+  .hero-figure video{display:none}
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}
   html.js .rv{opacity:1;transform:none}
@@ -615,8 +618,9 @@ section[id]{scroll-margin-top:96px}
             <a class="btn btn-ghost" href="clinic.html">Понять, что с тобой</a>
           </div>
         </div>
-        <div class="hero-figure" id="heroFig">
-          <img draggable="false" src="assets/img/psibo_portrait_blue.jpg" alt="Психо_Богиня — портрет">
+        <div class="hero-figure hero-figure--video" id="heroFig">
+          <img class="hero-poster" src="assets/img/hero_poster.jpg" alt="Психо_Богиня — портрет">
+        <video class="hero-video" src="assets/img/hero_loop.mp4" poster="assets/img/hero_poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Психо_Богиня смотрит в камеру"></video>
           <div class="gaze"><span class="dot"></span> вижу тебя насквозь</div>
           <div class="hero-stamp">Приём 24/7<i>кабинет открыт</i></div>
         </div>
