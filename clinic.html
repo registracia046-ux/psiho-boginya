@@ -68,12 +68,14 @@ body::after{
 }
 main,header,footer{position:relative;z-index:2}
 .ward-bg{position:fixed;inset:0;z-index:1;overflow:hidden;pointer-events:none}
-.ward-bg__video{width:100%;height:100%;object-fit:cover;opacity:.42;filter:saturate(.9)}
-.ward-bg__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,10,20,.88) 0%,rgba(7,10,20,.52) 36%,rgba(7,10,20,.80) 72%,rgba(7,10,20,.95) 100%)}
+.ward-bg__video{width:100%;height:100%;object-fit:cover;opacity:.50;filter:saturate(.95)}
+@media (max-width:760px){.ward-bg__video{opacity:.62}}
+.ward-bg__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,10,20,.82) 0%,rgba(7,10,20,.44) 36%,rgba(7,10,20,.72) 72%,rgba(7,10,20,.92) 100%)}
+@media (max-width:760px){.ward-bg__veil{background:linear-gradient(180deg,rgba(7,10,20,.46) 0%,rgba(7,10,20,.38) 32%,rgba(7,10,20,.44) 68%,rgba(7,10,20,.60) 100%)}}
 
 .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
 .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:"";width:26px;height:1px;background:var(--line-strong)}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spacing:-.01em;margin:0}
 h2{font-size:clamp(30px,5.2vw,50px)}
@@ -100,7 +102,7 @@ p{margin:0 0 1em}
 .gate-mark img{width:100%;height:100%;object-fit:cover}
 .gate-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
 .gate-actions .btn{padding:14px 22px;min-height:48px}
-.gate-note{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:20px;letter-spacing:.08em}
+.gate-note{font-family:var(--mono);font-size:11px;color:var(--mist);margin-top:20px;letter-spacing:.08em}
 
 /* ============ BUTTONS ============ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
