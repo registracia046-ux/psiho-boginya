@@ -657,6 +657,10 @@ section[id]{scroll-margin-top:96px}
   line-height:1.45;color:var(--ice);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;z-index:5}
 .cw-bubble.show{opacity:1;transform:translate(-50%,0)}
 .cw-bubble.rose{border-left-color:var(--rose)}
+.cw-bname{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:7px}
+.cw-bubble.rose .cw-bname{color:var(--rose)}
+.cw-btext{display:block;font-family:var(--serif);font-size:clamp(15px,1.7vw,19px);line-height:1.45}
 .cw-fx{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:0}
 .cw-fx.slap{background:radial-gradient(60% 60% at 50% 50%,rgba(194,102,107,.45),transparent 70%);animation:cwFlash .5s ease}
 .cw-fx.sleep{background:radial-gradient(70% 70% at 50% 45%,rgba(10,16,30,.92),transparent 75%);animation:cwFlash 1.1s ease}
@@ -678,6 +682,25 @@ section[id]{scroll-margin-top:96px}
   .cw-cap{font-size:9px}
   .cw-hud{gap:8px}
 }
+
+.cw-curtain{transform:translateX(-50%);transform-origin:50% 0;cursor:pointer;
+  animation:cwSway 7.5s ease-in-out infinite}
+.cw-curtain img{height:100%;width:auto;display:block;
+  filter:drop-shadow(0 10px 26px rgba(0,0,0,.45)) drop-shadow(0 0 18px rgba(255,255,255,.22))}
+@keyframes cwSway{
+  0%,100%{transform:translateX(-50%) skewX(0deg) scaleX(1)}
+  22%{transform:translateX(calc(-50% + 7px)) skewX(2.4deg) scaleX(1.025)}
+  48%{transform:translateX(calc(-50% - 8px)) skewX(-1.8deg) scaleX(.985)}
+  72%{transform:translateX(calc(-50% + 5px)) skewX(2.9deg) scaleX(1.03)}}
+.cw-curtain.cw-gust{animation-duration:1.15s}
+.cw-fx.wind{background:radial-gradient(60% 60% at 50% 40%,rgba(233,242,255,.3),transparent 72%);animation:cwFlash 1.2s ease}
+.cw-room.cw-punish{animation:cwPunish .4s ease}
+@keyframes cwPunish{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){
+  .cw-curtain{animation:none}
+  .cw-room.cw-punish{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -1203,22 +1226,33 @@ section[id]{scroll-margin-top:96px}
     corridor:{ name:'КОРИДОР', img:'assets/img/clinic/corridor_plain.jpg', focus:0.36, items:[], doors:[],
       exits:[{to:'ward1',x:46,y:47,label:'палата 1'},{to:'ward2',x:57,y:43,label:'палата 2'},
              {to:'cabinet',x:52,y:64,label:'кабинет'}]},
+    /* ПАЛАТА №1 — предметы оставлены как есть, всё работает */
     ward1:{ name:'ПАЛАТА №1', img:'assets/img/clinic/ward_one.jpg', focus:0.40,
       items:[{id:'pill1',x:20.8,y:46.2,h:6.6,src:['assets/img/clinic/obj_skopolamin.png','assets/img/clinic/obj_dimedrol.png'],
               names:['СКОПОЛАМИН','ДИМЕДРОЛ'],tip:'на тумбочке'},
              {id:'glass1',x:14.0,y:53.0,h:9.0,src:['assets/img/clinic/obj_stakan.png'],names:['Стакан'],tip:'у кровати'}],
       doors:[], exits:[{to:'corridor',x:88,y:70,label:'в коридор'}]},
     ward2:{ name:'ПАЛАТА №2', img:'assets/img/clinic/ward_two.jpg', focus:0.42,
-      items:[{id:'syr2',x:19.0,y:47.0,h:12.0,src:['assets/img/clinic/obj_syringe.png'],names:['Шприц'],tip:'на кровати'},
-             {id:'belt2',x:48.5,y:45.0,h:8.0,src:['assets/img/clinic/obj_remen.png'],names:['Ремни'],tip:'на полу'},
-             {id:'tetrad2',x:33.0,y:41.0,h:8.0,src:['assets/img/clinic/obj_tetrad.png'],names:['Тетрадь'],tip:'на кровати'}],
+      items:[{id:'syr2',x:19.0,y:47.0,h:12.0,src:['assets/img/clinic/obj_syringe_named.png'],
+              names:['ШПРИЦ'],tip:'на кровати',punish:'Уколись. Сам. Я подожду.',rose:true},
+             {id:'belt2',x:48.5,y:45.0,h:8.0,src:['assets/img/clinic/obj_remen_named.png'],
+              names:['РЕМНИ'],tip:'на полу',punish:'Запястье к стулу. Не дёргайся — я не люблю, когда дёргаются.',rose:true},
+             {id:'tetrad2',x:33.0,y:41.0,h:8.0,src:['assets/img/clinic/obj_tetrad_named.png'],
+              names:['ИСТОРИЯ БОЛЕЗНИ'],tip:'на кровати',punish:'Запиши всё, что я скажу. Дословно. И перечитай вслух.'}],
+      curtains:[{id:'cur2',x:47.5,y:1,h:70,src:'assets/img/clinic/curtain.png',
+                  punish:'Сквозняк. Занавеску не закрывают — её сдувает.'}],
       doors:[], exits:[{to:'corridor',x:89,y:70,label:'в коридор'}]},
     cabinet:{ name:'КАБИНЕТ', img:'assets/img/clinic/clinic_office.jpg', focus:0.42,
       items:[{id:'pill',x:57.6,y:45.9,h:7.6,src:['assets/img/clinic/obj_skopolamin.png','assets/img/clinic/obj_dimedrol.png'],
-              names:['СКОПОЛАМИН','ДИМЕДРОЛ'],tip:'на подносе'},
-             {id:'syr',x:61.4,y:45.0,h:11.5,src:['assets/img/clinic/obj_syringe.png'],names:['Шприц'],tip:'на подносе'},
-             {id:'glass',x:57.4,y:61.2,h:11.5,src:['assets/img/clinic/obj_stakan.png'],names:['Стакан'],tip:'нижняя полка'},
-             {id:'belt',x:62.2,y:62.0,h:7.0,src:['assets/img/clinic/obj_remen.png'],names:['Ремни'],tip:'нижняя полка'}],
+              names:['СКОПОЛАМИН','ДИМЕДРОЛ'],tip:'на подносе',
+              punish:['Сдой. Тихо, никому. И не спрашивай, зачем.',
+                      'Спи. Снотворное начнёт действовать через двадцать минут. Разбудишься не ты.'],rose:true},
+             {id:'syr',x:61.4,y:45.0,h:11.5,src:['assets/img/clinic/obj_syringe_named.png'],
+              names:['ШПРИЦ'],tip:'на подносе',punish:'Уколись. Сам. Я подожду.',rose:true},
+             {id:'glass',x:57.4,y:61.2,h:11.5,src:['assets/img/clinic/obj_stakan_named.png'],
+              names:['ВОДА'],tip:'нижняя полка',punish:'Выпей всё. И сядь обратно. Руки на колени.'},
+             {id:'belt',x:62.2,y:62.0,h:7.0,src:['assets/img/clinic/obj_remen_named.png'],
+              names:['РЕМНИ'],tip:'нижняя полка',punish:'Запястье к стулу. Не дёргайся.',rose:true}],
       doors:[{x:19,y:40,cls:'left narrow',label:'кабинет слева',act:'sleep'},
              {x:95.4,y:42,cls:'right narrow',label:'кабинет справа',act:'slap'}],
       exits:[{to:'corridor',x:50,y:74,label:'в коридор'}]}
@@ -1257,8 +1291,17 @@ section[id]{scroll-margin-top:96px}
       el.style.left=it.x+'%'; el.style.top=it.y+'%'; el.style.height=it.h+'%';
       var arr=Array.isArray(it.src)?it.src:[it.src];
       var start=(arr.length>1 && cwVisit>1)?1:0;
-      el.innerHTML='<img src="'+arr[start]+'" alt="">';
+      el.innerHTML='<img src="'+arr[start]+'" alt="'+it.names[start]+'">';
       el.addEventListener('click',function(e){ e.stopPropagation(); cwItem(el,it); });
+      elLayer.appendChild(el);
+    });
+    /* занавески — прозрачный тюль, колышется на ветру */
+    (R.curtains||[]).forEach(function(cu){
+      var el=d.createElement('div');
+      el.className='cw-hot cw-curtain';
+      el.style.left=cu.x+'%'; el.style.top=cu.y+'%'; el.style.height=cu.h+'%';
+      el.innerHTML='<img src="'+cu.src+'" alt="Тюлевая занавеска">';
+      el.addEventListener('click',function(e){ e.stopPropagation(); cwCurtain(el,cu); });
       elLayer.appendChild(el);
     });
     R.doors.forEach(function(dr){
@@ -1297,20 +1340,39 @@ section[id]{scroll-margin-top:96px}
       elFade.classList.remove('on');
     },520);
   }
+  /* предмет: подмена + «наказание» */
   function cwItem(el,it){
     var arr=Array.isArray(it.src)?it.src:[it.src];
-    if(arr.length<2) return;
     var imgEl=el.querySelector('img');
-    var next=(imgEl.getAttribute('src')===arr[0])?1:0;
-    imgEl.classList.remove('cw-swap'); void imgEl.offsetWidth;
-    imgEl.src=arr[next]; imgEl.classList.add('cw-swap');
-    cwSay(next? 'ДИМЕДРОЛ. Второй визит — и на месте уже другое.'
-                : 'СКОПОЛАМИН. Первый визит. Запомни это ощущение.');
+    var idx=0;
+    if(arr.length>1){
+      idx=(imgEl.getAttribute('src')===arr[0])?1:0;
+      imgEl.classList.remove('cw-swap'); void imgEl.offsetWidth;
+      imgEl.src=arr[idx]; imgEl.classList.add('cw-swap');
+      imgEl.alt=it.names[idx];
+    }
+    var txt = it.punish;
+    if(Array.isArray(txt)) txt=txt[idx];
+    if(txt){
+      cwSay(txt,!!it.rose,it.names[idx]);
+      if(it.rose){ elRoom.classList.remove('cw-punish'); void elRoom.offsetWidth; elRoom.classList.add('cw-punish'); }
+    } else if(arr.length>1){
+      cwSay(idx? 'Второй визит — и на месте уже другое.'
+                : 'Первый визит. Запомни это ощущение.',false,it.names[idx]);
+    }
+  }
+  /* занавеска: порыв ветра + реплика */
+  function cwCurtain(el,cu){
+    el.classList.remove('cw-gust'); void el.offsetWidth; el.classList.add('cw-gust');
+    setTimeout(function(){ el.classList.remove('cw-gust'); },1600);
+    var fx=d.getElementById('cwFx');
+    fx.className='cw-fx wind'; void fx.offsetWidth; fx.className='cw-fx';
+    cwSay(cu.punish||'Сквозняк.',false,'ЗАНАВЕСКА');
   }
   function cwDoor(dr){
     if(dr.act==='slap'){
       elFx.className='cw-fx slap'; void elFx.offsetWidth; elFx.className='cw-fx';
-      elRoom.classList.remove('shake'); void elRoom.offsetWidth; elRoom.classList.add('shake');
+      elRoom.classList.remove('cw-shake'); void elRoom.offsetWidth; elRoom.classList.add('cw-shake');
       cwSay('Заходи без стука. Правая дверь — это про морду.',true);
     } else {
       elFx.className='cw-fx sleep'; void elFx.offsetWidth; elFx.className='cw-fx';
@@ -1321,11 +1383,12 @@ section[id]{scroll-margin-top:96px}
     }
   }
   var cwTmr=null;
-  function cwSay(txt,rose){
-    elBubble.textContent=txt;
+  function cwSay(txt,rose,name){
+    if(name){ elBubble.innerHTML='<span class="cw-bname">'+name+'</span><span class="cw-btext">'+txt+'</span>'; }
+    else elBubble.textContent=txt;
     elBubble.classList.toggle('rose',!!rose);
     elBubble.classList.add('show');
-    clearTimeout(cwTmr); cwTmr=setTimeout(function(){ elBubble.classList.remove('show'); },4200);
+    clearTimeout(cwTmr); cwTmr=setTimeout(function(){ elBubble.classList.remove('show'); },4600);
   }
   elRoom.addEventListener('pointerdown',function(e){ cwDrag=true; cwSx=e.clientX; cwSp=cwPos; elRoom.classList.add('dragging'); });
   elRoom.addEventListener('pointermove',function(e){ if(!cwDrag) return; cwPos=cwClamp(cwSp+(e.clientX-cwSx)); cwApply(); });
