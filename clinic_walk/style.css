@@ -17,7 +17,8 @@
 .cw-chip:hover{color:var(--ice);border-color:var(--accent)}
 .cw-chip.on{color:var(--ink);background:var(--accent);border-color:var(--accent)}
 .cw-room{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;
-  background:#0A0F18;height:clamp(300px,42vw,520px);cursor:grab;touch-action:pan-y;user-select:none}
+  background:#0A0F18;height:max(150px,calc(clamp(300px,42vw,520px) * var(--cwz,1)));
+  cursor:grab;touch-action:pan-y;user-select:none;transition:height .35s cubic-bezier(.22,.61,.36,1)}
 .cw-room.dragging{cursor:grabbing}
 .cw-pan{position:absolute;top:0;left:0;height:100%;width:max-content;will-change:transform}
 .cw-img{height:100%;width:auto;max-width:none;display:block;pointer-events:none}

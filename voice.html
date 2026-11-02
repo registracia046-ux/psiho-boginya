@@ -555,7 +555,8 @@ section[id]{scroll-margin-top:96px}
 .cw-chip:hover{color:var(--ice);border-color:var(--accent)}
 .cw-chip.on{color:var(--ink);background:var(--accent);border-color:var(--accent)}
 .cw-room{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;
-  background:#0A0F18;height:clamp(300px,42vw,520px);cursor:grab;touch-action:pan-y;user-select:none}
+  background:#0A0F18;height:max(150px,calc(clamp(300px,42vw,520px) * var(--cwz,1)));
+  cursor:grab;touch-action:pan-y;user-select:none;transition:height .35s cubic-bezier(.22,.61,.36,1)}
 .cw-room.dragging{cursor:grabbing}
 .cw-pan{position:absolute;top:0;left:0;height:100%;width:max-content;will-change:transform}
 .cw-img{height:100%;width:auto;max-width:none;display:block;pointer-events:none}
@@ -1496,6 +1497,37 @@ section[id]{scroll-margin-top:96px}
       else { var it=ct.item; cwSay('Уже открыто. '+it.names[0]+' — твой.',false,it.names[0]); }
     },420);
   };
+  /* ---------- масштаб панорамы ---------- */
+  var CW_ZOOM=[1,0.85,0.72,0.6,0.5,0.4], cwZi=0;
+  function cwSetZoom(i,keepCenter){
+    cwZi=Math.max(0,Math.min(CW_ZOOM.length-1,i));
+    var base=cwImgW()/CW_ZOOM[cwZi];                       /* ширина панорамы при z=1 */
+    var centerFrac=keepCenter?(-cwPos+elRoom.clientWidth/2)/cwImgW():null;
+    elRoom.style.setProperty('--cwz',CW_ZOOM[cwZi]);
+    setTimeout(function(){
+      if(centerFrac!==null){
+        var imgNew=base*CW_ZOOM[cwZi];
+        cwPos=elRoom.clientWidth/2-centerFrac*imgNew;
+      }
+      cwPos=cwClamp(cwPos);
+      cwApply();
+    },400);
+  }
+  function cwZoom(dir){ cwSetZoom(cwZi+dir,true); }
+  function cwZoomAll(){
+    /* подбираем наибольший масштаб, при котором вся панорама помещается в кадр */
+    var base=cwImgW()/CW_ZOOM[cwZi];
+    var need=elRoom.clientWidth/base;
+    var best=CW_ZOOM.length-1, bd=1e9, any=0;
+    for(var i=0;i<CW_ZOOM.length;i++){
+      if(CW_ZOOM[i]<=need+0.005){ var d=need-CW_ZOOM[i]; if(d<bd){ bd=d; best=i; } any=1; }
+    }
+    if(!any) best=CW_ZOOM.length-1;
+    cwSetZoom(best,true);
+  }
+  d.getElementById('cwZoomOut').onclick=function(){ cwZoom(1); };   /* − : к меньшему масштабу */
+  d.getElementById('cwZoomIn').onclick=function(){ cwZoom(-1); };    /* + : к большему масштабу */
+  d.getElementById('cwZoomAll').onclick=function(){ cwZoomAll(); };
   d.getElementById('cwReset').onclick=function(){
     cwState={}; cwSaveFound(cwState); cwBuild();
     cwSay('Приём начинается заново. Ищи всё с нуля.',false,'НАЧАЛО');

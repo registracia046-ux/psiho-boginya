@@ -353,6 +353,37 @@
       else { var it=ct.item; cwSay('Уже открыто. '+it.names[0]+' — твой.',false,it.names[0]); }
     },420);
   };
+  /* ---------- масштаб панорамы ---------- */
+  var CW_ZOOM=[1,0.85,0.72,0.6,0.5,0.4], cwZi=0;
+  function cwSetZoom(i,keepCenter){
+    cwZi=Math.max(0,Math.min(CW_ZOOM.length-1,i));
+    var base=cwImgW()/CW_ZOOM[cwZi];                       /* ширина панорамы при z=1 */
+    var centerFrac=keepCenter?(-cwPos+elRoom.clientWidth/2)/cwImgW():null;
+    elRoom.style.setProperty('--cwz',CW_ZOOM[cwZi]);
+    setTimeout(function(){
+      if(centerFrac!==null){
+        var imgNew=base*CW_ZOOM[cwZi];
+        cwPos=elRoom.clientWidth/2-centerFrac*imgNew;
+      }
+      cwPos=cwClamp(cwPos);
+      cwApply();
+    },400);
+  }
+  function cwZoom(dir){ cwSetZoom(cwZi+dir,true); }
+  function cwZoomAll(){
+    /* подбираем наибольший масштаб, при котором вся панорама помещается в кадр */
+    var base=cwImgW()/CW_ZOOM[cwZi];
+    var need=elRoom.clientWidth/base;
+    var best=CW_ZOOM.length-1, bd=1e9, any=0;
+    for(var i=0;i<CW_ZOOM.length;i++){
+      if(CW_ZOOM[i]<=need+0.005){ var d=need-CW_ZOOM[i]; if(d<bd){ bd=d; best=i; } any=1; }
+    }
+    if(!any) best=CW_ZOOM.length-1;
+    cwSetZoom(best,true);
+  }
+  d.getElementById('cwZoomOut').onclick=function(){ cwZoom(1); };   /* − : к меньшему масштабу */
+  d.getElementById('cwZoomIn').onclick=function(){ cwZoom(-1); };    /* + : к большему масштабу */
+  d.getElementById('cwZoomAll').onclick=function(){ cwZoomAll(); };
   d.getElementById('cwReset').onclick=function(){
     cwState={}; cwSaveFound(cwState); cwBuild();
     cwSay('Приём начинается заново. Ищи всё с нуля.',false,'НАЧАЛО');
