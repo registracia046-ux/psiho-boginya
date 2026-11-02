@@ -12,6 +12,11 @@
       <span class="cw-visittxt">визит пациента</span>
       <span class="cw-where" id="cwWhere">—</span>
     </div>
+    <div class="cw-meta cw-meta2">
+      <span class="cw-bill" id="cwBill">счёт: 0 ₽</span>
+      <span class="cw-found" id="cwFound">найдено 0 из 20</span>
+      <span class="cw-total" id="cwTotal">полный счёт —</span>
+    </div>
   </div>
 
   <div class="cw-chips" id="cwChips"></div>
@@ -27,12 +32,15 @@
     <div class="cw-fade" id="cwFade"></div>
   </div>
 
+  <div class="cw-prog"><i id="cwBar"></i></div>
+
   <div class="cw-hud">
     <div class="cw-arrows"><button id="cwLeft" aria-label="Влево">←</button><button id="cwRight" aria-label="Вправо">→</button></div>
     <span class="cw-hint" id="cwHint">тяни картинку · кликай по предметам и дверям</span>
     <button class="cw-btn cw-ghost" id="cwDLeft">◀ левая дверь</button>
     <button class="cw-btn cw-ghost" id="cwDRight">правая дверь ▶</button>
     <button class="cw-btn" id="cwNext">Следующий визит</button>
+    <button class="cw-btn cw-ghost" id="cwReset">Начать заново</button>
   </div>
 </div>
 

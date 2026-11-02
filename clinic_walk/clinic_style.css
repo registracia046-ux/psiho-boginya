@@ -122,3 +122,14 @@
 .cw-item.cw-fresh::before,.cw-curtain.cw-fresh::before{content:"";position:absolute;right:-4px;top:-4px;width:11px;height:11px;
   border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(127,212,232,.2);animation:cwPing 2.2s ease-out infinite;z-index:2}
 .cw-fx.finale{background:radial-gradient(70% 70% at 50% 45%,rgba(127,212,232,.35),transparent 72%);animation:cwFlash 2.2s ease}
+
+.cw-cont{pointer-events:auto;cursor:pointer;border:1px dashed rgba(127,212,232,.3);border-radius:10px;
+  transition:border-color .3s ease,background .3s ease}
+.cw-cont:hover{border-color:rgba(127,212,232,.75);background:rgba(127,212,232,.08)}
+.cw-cont .cw-cap{opacity:1;border-color:rgba(127,212,232,.5)}
+.cw-cont::after{content:"";position:absolute;right:-5px;top:-5px;width:11px;height:11px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 4px rgba(127,212,232,.2);animation:cwPing 2.2s ease-out infinite}
+.cw-cont.opened{border-style:solid;border-color:rgba(127,212,232,.13);background:rgba(127,212,232,.035)}
+.cw-cont.opened::after{background:var(--dim);box-shadow:none;animation:none}
+.cw-reveal{animation:cwReveal .62s cubic-bezier(.22,.61,.36,1)}
+@keyframes cwReveal{from{opacity:0;transform:translate(-50%,-38%) scale(.45)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}

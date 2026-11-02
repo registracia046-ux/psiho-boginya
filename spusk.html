@@ -712,6 +712,17 @@ section[id]{scroll-margin-top:96px}
   border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(127,212,232,.2);animation:cwPing 2.2s ease-out infinite;z-index:2}
 .cw-fx.finale{background:radial-gradient(70% 70% at 50% 45%,rgba(127,212,232,.35),transparent 72%);animation:cwFlash 2.2s ease}
 
+.cw-cont{pointer-events:auto;cursor:pointer;border:1px dashed rgba(127,212,232,.3);border-radius:10px;
+  transition:border-color .3s ease,background .3s ease}
+.cw-cont:hover{border-color:rgba(127,212,232,.75);background:rgba(127,212,232,.08)}
+.cw-cont .cw-cap{opacity:1;border-color:rgba(127,212,232,.5)}
+.cw-cont::after{content:"";position:absolute;right:-5px;top:-5px;width:11px;height:11px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 4px rgba(127,212,232,.2);animation:cwPing 2.2s ease-out infinite}
+.cw-cont.opened{border-style:solid;border-color:rgba(127,212,232,.13);background:rgba(127,212,232,.035)}
+.cw-cont.opened::after{background:var(--dim);box-shadow:none;animation:none}
+.cw-reveal{animation:cwReveal .62s cubic-bezier(.22,.61,.36,1)}
+@keyframes cwReveal{from{opacity:0;transform:translate(-50%,-38%) scale(.45)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
 </style>
 </head>
 <body>
@@ -1242,73 +1253,86 @@ section[id]{scroll-margin-top:96px}
   var CW_ROOMS={
     corridor:{ name:'КОРИДОР', img:'assets/img/clinic/corridor_plain.jpg', focus:0.36,
       items:[
-        {id:'iv', x:24.0, y:63.0, h:34, src:['assets/img/clinic/obj_ivstand_named.png'], names:['КАПЕЛЬНИЦА'],
-         punish:'Стойка капельницы. Я поставлю. Ты не заметишь, в какой момент уснул.', bill:2400},
-        {id:'key', x:34.0, y:76.0, h:6, src:['assets/img/clinic/obj_key_named.png'], names:['КЛЮЧ ОТ ПАЛАТЫ'],
-         punish:'Ключ от палаты — твой. Оплатишь смену. Не оплатишь — будешь спать в коридоре.', bill:800},
-        {id:'jr', x:57.0, y:60.0, h:9, src:['assets/img/clinic/obj_journal_named.png'], names:['ЖУРНАЛ ПОСЕЩЕНИЙ'],
-         punish:'Журнал посещений. Подпишись здесь. Каждый раз — отдельная строчка.', bill:900}
-      ], doors:[], curtains:[],
+        {id:'iv', x:41.0, y:71.0, h:34, src:['assets/img/clinic/obj_ivstand.png'], names:['КАПЕЛЬНИЦА'],
+         tip:'стоит у койки', bill:2400, punish:'Стойка капельницы. Я поставлю. Ты не заметишь, в какой момент уснул.'},
+        {id:'key', x:19.0, y:67.0, h:5, src:['assets/img/clinic/obj_key.png'], names:['КЛЮЧ ОТ ПАЛАТЫ'],
+         tip:'на койке', bill:800, punish:'Ключ от палаты — твой. Оплатишь смену. Не оплатишь — будешь спать в коридоре.'}
+      ],
+      containers:[
+        {id:'cabA', x:59.0, y:6.0, w:11, h:78, label:'ШКАФ', hint:'открыть шкаф',
+         item:{id:'jr', src:['assets/img/clinic/obj_journal.png'], names:['ЖУРНАЛ ПОСЕЩЕНИЙ'],
+               reveal:{x:64.0,y:50.0,h:8}, bill:900,
+               punish:'Журнал посещений. Подпишись здесь. Каждый раз — отдельная строчка.'}}
+      ],
+      doors:[], curtains:[],
       exits:[{to:'ward1',x:46,y:47,label:'палата 1'},{to:'ward2',x:57,y:43,label:'палата 2'},
              {to:'cabinet',x:52,y:64,label:'кабинет'}]},
     ward1:{ name:'ПАЛАТА №1', img:'assets/img/clinic/ward_one.jpg', focus:0.40,
       items:[
-        {id:'pill1', x:20.8, y:46.2, h:6.6, src:['assets/img/clinic/obj_skopolamin.png','assets/img/clinic/obj_dimedrol.png'],
-         names:['СКОПОЛАМИН','ДИМЕДРОЛ'], tip:'на тумбочке', bill:5000, rose:true,
-         punish:['Сдой. Тихо, никому. И не спрашивай, зачем.',
-                 'Спи. Снотворное начнёт действовать через двадцать минут. Разбудишься не ты.']},
-        {id:'glass1', x:17.2, y:54.5, h:9, src:['assets/img/clinic/obj_stakan_named.png'], names:['ВОДА'], tip:'у кровати', bill:600,
-         punish:'Выпей всё. И сядь обратно. Руки на колени.'},
-        {id:'therm', x:31.5, y:59.5, h:9, src:['assets/img/clinic/obj_thermometer_named.png'], names:['ТЕРМОМЕТР'], bill:900,
-         punish:'Температура в норме. Ты в порядке — настолько, что отдашь всё, о чём попросят.'},
-        {id:'ice', x:24.5, y:56.5, h:10, src:['assets/img/clinic/obj_icepack_named.png'], names:['ПУЗЫРЬ СО ЛЬДОМ'], bill:1500,
-         punish:'Лёд. Приложить к голове — или к бумажнику. Выбирай сам.'}
-      ], doors:[], curtains:[], exits:[{to:'corridor',x:88,y:70,label:'в коридор'}]},
+        {id:'glass1', x:15.0, y:58.0, h:9, src:['assets/img/clinic/obj_stakan.png'], names:['ВОДА'],
+         tip:'на койке', bill:600, punish:'Выпей всё. Сядь обратно. Руки на колени. Потом сдоишь — и снова за мной.'},
+        {id:'therm', x:24.0, y:56.0, h:8, src:['assets/img/clinic/obj_thermometer.png'], names:['ТЕРМОМЕТР'],
+         tip:'у изголовья', bill:900, punish:'Температура в норме. Ты в порядке — настолько, что отдашь всё, о чём попросят.'},
+        {id:'ice', x:51.0, y:61.0, h:10, src:['assets/img/clinic/obj_icepack.png'], names:['ПУЗЫРЬ СО ЛЬДОМ'],
+         tip:'на стуле', bill:1500, punish:'Лёд. Приложить к голове — или к бумажнику. Выбирай сам.'}
+      ],
+      containers:[
+        {id:'nightA', x:1.0, y:54.0, w:6, h:36, label:'ТУМБОЧКА', hint:'открыть тумбочку',
+         item:{id:'pill1', src:['assets/img/clinic/obj_skopolamin.png','assets/img/clinic/obj_dimedrol.png'],
+               names:['СКОПОЛАМИН','ДИМЕДРОЛ'], reveal:{x:4.0,y:52.0,h:6.5}, bill:5000, rose:true,
+               punish:['Сдой. Тихо, никому. И не спрашивай, зачем.',
+                       'Спи. Снотворное начнёт действовать через двадцать минут. Разбудишься не ты.']}}
+      ],
+      doors:[], curtains:[], exits:[{to:'corridor',x:88,y:70,label:'в коридор'}]},
     ward2:{ name:'ПАЛАТА №2', img:'assets/img/clinic/ward_two.jpg', focus:0.42,
       items:[
-        {id:'syr2', x:19.0, y:47.0, h:12, src:['assets/img/clinic/obj_syringe_named.png'], names:['ШПРИЦ'], bill:3000, rose:true,
-         punish:'Уколись. Сам. Я подожду.'},
-        {id:'belt2', x:48.5, y:45.0, h:8, src:['assets/img/clinic/obj_remen_named.png'], names:['РЕМНИ'], bill:1800, rose:true,
-         punish:'Запястье к стулу. Не дёргайся — я не люблю, когда дёргаются.'},
-        {id:'tetrad2', x:33.0, y:41.0, h:8, src:['assets/img/clinic/obj_tetrad_named.png'], names:['ИСТОРИЯ БОЛЕЗНИ'], bill:700,
-         punish:'Запиши всё, что я скажу. Дословно. И перечитай вслух.'},
-        {id:'steth', x:41.0, y:47.5, h:9, src:['assets/img/clinic/obj_stethoscope_named.png'], names:['ФОНЕНДОСКОП'], bill:1100,
-         punish:'Дыши. Глубже. Теперь дышишь так, как скажу.'},
-        {id:'pills', x:28.5, y:52.5, h:9, src:['assets/img/clinic/obj_pillbox_named.png'], names:['ТАБЛЕТКИ'], bill:450,
-         punish:'Витамины. На память. Чтобы не забыл, сколько должен.'},
-        {id:'basin', x:47.0, y:74.0, h:12, src:['assets/img/clinic/obj_basin_named.png'], names:['ТАЗ С ВОДОЙ'], bill:1200,
-         punish:'Таз с водой. Отраженье. Посмотри, что от тебя останется, когда я закончу.'}
+        {id:'syr2', x:31.0, y:51.0, h:11, src:['assets/img/clinic/obj_syringe.png'], names:['ШПРИЦ'],
+         tip:'на койке', bill:3000, rose:true, punish:'Уколись. Сам. Я подожду.'},
+        {id:'belt2', x:53.0, y:50.0, h:8, src:['assets/img/clinic/obj_remen.png'], names:['РЕМНИ'],
+         tip:'привязан к стулу', bill:1800, rose:true, punish:'Запястье к стулу. Не дёргайся — я не люблю, когда дёргаются.'},
+        {id:'tetrad2', x:16.5, y:72.0, h:8, src:['assets/img/clinic/obj_tetrad.png'], names:['ИСТОРИЯ БОЛЕЗНИ'],
+         tip:'на полотенцах', bill:700, punish:'Запиши всё, что я скажу. Дословно. И перечитай вслух — про то, сколько ты должен.'},
+        {id:'steth', x:66.0, y:49.0, h:9, src:['assets/img/clinic/obj_stethoscope.png'], names:['ФОНЕНДОСКОП'],
+         tip:'на койке', bill:1100, punish:'Дыши. Глубже. Теперь дышишь так, как скажу.'},
+        {id:'basin', x:56.0, y:74.0, h:12, src:['assets/img/clinic/obj_basin.png'], names:['ТАЗ С ВОДОЙ'],
+         tip:'на полу', bill:1200, punish:'Смотри в таз, что от тебя останется, когда я закончу. И сдои мне, пока смотришь.'}
+      ],
+      containers:[
+        {id:'cabB', x:27.0, y:2.0, w:8, h:50, label:'ШКАФ', hint:'открыть шкаф',
+         item:{id:'pills', src:['assets/img/clinic/obj_pillbox.png'], names:['ТАБЛЕТКИ'],
+               reveal:{x:31.0,y:34.0,h:9}, bill:450,
+               punish:'Витамины. На память. Чтобы не забыл, сколько должен — и сколько раз сдоил.'}}
       ],
       curtains:[{id:'cur2',x:47.5,y:1,h:70,src:'assets/img/clinic/curtain.png', bill:600,
                   punish:'Сквозняк. Занавеску не закрывают — её сдувает.'}],
       doors:[], exits:[{to:'corridor',x:89,y:70,label:'в коридор'}]},
     cabinet:{ name:'КАБИНЕТ', img:'assets/img/clinic/clinic_office.jpg', focus:0.42,
       items:[
-        {id:'pill', x:57.6, y:45.9, h:7.6, src:['assets/img/clinic/obj_skopolamin.png','assets/img/clinic/obj_dimedrol.png'],
+        {id:'pill', x:58.5, y:48.0, h:7.5, src:['assets/img/clinic/obj_skopolamin.png','assets/img/clinic/obj_dimedrol.png'],
          names:['СКОПОЛАМИН','ДИМЕДРОЛ'], tip:'на подносе', bill:5000, rose:true,
          punish:['Сдой. Тихо, никому. И не спрашивай, зачем.',
                  'Спи. Снотворное начнёт действовать через двадцать минут. Разбудишься не ты.']},
-        {id:'syr', x:61.4, y:45.0, h:11.5, src:['assets/img/clinic/obj_syringe_named.png'], names:['ШПРИЦ'], tip:'на подносе', bill:3000, rose:true,
-         punish:'Уколись. Сам. Я подожду.'},
-        {id:'glass', x:57.4, y:61.2, h:11.5, src:['assets/img/clinic/obj_stakan_named.png'], names:['ВОДА'], tip:'нижняя полка', bill:600,
-         punish:'Выпей всё. И сядь обратно. Руки на колени.'},
-        {id:'belt', x:62.2, y:62.0, h:7, src:['assets/img/clinic/obj_remen_named.png'], names:['РЕМНИ'], tip:'нижняя полка', bill:1800, rose:true,
-         punish:'Запястье к стулу. Не дёргайся.'},
-        {id:'xray', x:42.0, y:30.0, h:22, src:['assets/img/clinic/obj_xray_named.png'], names:['СНИМОК'], bill:2600,
-         punish:'Снимок. Смотри: там пусто. Я заполню — и подпишу, где деньги.'},
-        {id:'mirror', x:27.0, y:28.0, h:18, src:['assets/img/clinic/obj_mirror_named.png'], names:['ЗЕРКАЛО'], bill:2200, rose:true,
-         punish:'В зеркале ты — мой. И это не комплимент.'}
+        {id:'syr', x:61.5, y:46.5, h:11, src:['assets/img/clinic/obj_syringe.png'], names:['ШПРИЦ'],
+         tip:'на подносе', bill:3000, rose:true, punish:'Уколись. Сам. Я подожду.'},
+        {id:'glass', x:57.5, y:58.5, h:9, src:['assets/img/clinic/obj_stakan.png'], names:['ВОДА'],
+         tip:'на нижней полке', bill:600, punish:'Выпей всё. Сядь обратно. Руки на колени. Потом сдоишь — и снова за мной.'},
+        {id:'belt', x:61.0, y:59.5, h:7, src:['assets/img/clinic/obj_remen.png'], names:['РЕМНИ'],
+         tip:'на нижней полке', bill:1800, rose:true, punish:'Запястье к стулу. Не дёргайся.'},
+        {id:'xray', x:29.0, y:25.0, h:22, src:['assets/img/clinic/obj_xray.png'], names:['СНИМОК'],
+         tip:'на стене', bill:2600, punish:'Снимок. Смотри: там пусто. Я заполню — и подпишу, где деньги.'},
+        {id:'mirror', x:46.0, y:22.0, h:18, src:['assets/img/clinic/obj_mirror.png'], names:['ЗЕРКАЛО'],
+         tip:'на стене', bill:2200, rose:true, punish:'В зеркале ты — мой. И это не комплимент.'}
       ],
       doors:[{x:19,y:40,cls:'left narrow',label:'кабинет слева',act:'sleep'},
              {x:95.4,y:42,cls:'right narrow',label:'кабинет справа',act:'slap'}],
       curtains:[], exits:[{to:'corridor',x:50,y:74,label:'в коридор'}]}
   };
-
   var CW_START='corridor', cwRoom=CW_START, cwVisit=1;
   var CW_TOTAL=0, CW_ALL=[];
   Object.keys(CW_ROOMS).forEach(function(k){
     (CW_ROOMS[k].items||[]).forEach(function(it){ CW_ALL.push(it); CW_TOTAL+=it.bill||0; });
     (CW_ROOMS[k].curtains||[]).forEach(function(cu){ CW_ALL.push(cu); CW_TOTAL+=cu.bill||0; });
+    (CW_ROOMS[k].containers||[]).forEach(function(ct){ CW_ALL.push(ct.item); CW_TOTAL+=ct.item.bill||0; });
   });
 
   function cwGet(){ try{ return parseInt(localStorage.getItem('pb_clinic_visit')||'1',10)||1; }catch(e){ return 1; } }
@@ -1373,6 +1397,16 @@ section[id]{scroll-margin-top:96px}
       el.addEventListener('click',function(e){ e.stopPropagation(); cwCurtain(el,cu); });
       elLayer.appendChild(el);
     });
+    (R.containers||[]).forEach(function(ct){
+      var el=d.createElement('div');
+      el.className='cw-hot cw-cont'+(cwState['ct_'+ct.id]?' opened':'');
+      el.style.left=ct.x+'%'; el.style.top=ct.y+'%';
+      el.style.width=ct.w+'%'; el.style.height=ct.h+'%';
+      el.innerHTML='<span class="cw-cap">'+ct.label+'</span>';
+      el.title=ct.hint||'';
+      el.addEventListener('click',function(e){ e.stopPropagation(); cwOpen(ct,el); });
+      elLayer.appendChild(el);
+    });
     R.doors.forEach(function(dr){
       var el=d.createElement('div');
       el.className='cw-hot cw-door '+dr.cls;
@@ -1433,6 +1467,26 @@ section[id]{scroll-margin-top:96px}
       cwSay(idx? 'Второй визит — и на месте уже другое.' : 'Первый визит. Запомни это ощущение.',false,it.names[idx]);
     }
     if(first) cwCheckEnd();
+  }
+  /* шкаф/тумбочка: достать спрятанный предмет */
+  function cwOpen(ct,el){
+    if(cwState['ct_'+ct.id]) return;
+    cwState['ct_'+ct.id]=1; cwSaveFound(cwState);
+    el.classList.add('opened');
+    var it=ct.item, rv=it.reveal;
+    var e2=d.createElement('div');
+    e2.className='cw-hot cw-item cw-reveal';
+    e2.style.left=rv.x+'%'; e2.style.top=rv.y+'%'; e2.style.height=rv.h+'%';
+    var arr=Array.isArray(it.src)?it.src:[it.src];
+    var start=(arr.length>1 && cwVisit>1)?1:0;
+    e2.innerHTML='<img src="'+arr[start]+'" alt="'+it.names[start]+'">';
+    e2.addEventListener('click',function(ev){ ev.stopPropagation(); cwItem(e2,it); });
+    elLayer.appendChild(e2);
+    /* подводим камеру к шкафу, чтобы предмет был в кадре */
+    cwPos=cwClamp(-(cwImgW()*rv.x/100-elRoom.clientWidth/2));
+    cwApply();
+    cwSay('Открыто. '+it.names[start]+' — твой.',false,it.names[start]);
+    cwScore();
   }
   /* занавеска: порыв ветра */
   function cwCurtain(el,cu){
