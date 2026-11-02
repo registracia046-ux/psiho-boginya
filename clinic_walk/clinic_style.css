@@ -134,3 +134,12 @@
 .cw-cont.opened::after{background:var(--dim);box-shadow:none;animation:none}
 .cw-reveal{animation:cwReveal .62s cubic-bezier(.22,.61,.36,1)}
 @keyframes cwReveal{from{opacity:0;transform:translate(-50%,-38%) scale(.45)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+.cw-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;display:none;
+  width:34px;height:54px;border-radius:8px;background:rgba(7,10,20,.8);border:1px solid rgba(127,212,232,.45);
+  color:var(--accent);font-size:20px;line-height:52px;text-align:center;pointer-events:none;
+  box-shadow:0 0 22px rgba(127,212,232,.22)}
+.cw-arrow.right{right:8px}
+.cw-arrow.left{left:8px}
+.cw-arrow.on{display:block;animation:cwArrow 1.6s ease-in-out infinite}
+@keyframes cwArrow{0%,100%{opacity:.45}50%{opacity:1}}

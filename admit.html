@@ -673,6 +673,15 @@ section[id]{scroll-margin-top:96px}
 .cw-reveal{animation:cwReveal .62s cubic-bezier(.22,.61,.36,1)}
 @keyframes cwReveal{from{opacity:0;transform:translate(-50%,-38%) scale(.45)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 
+.cw-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;display:none;
+  width:34px;height:54px;border-radius:8px;background:rgba(7,10,20,.8);border:1px solid rgba(127,212,232,.45);
+  color:var(--accent);font-size:20px;line-height:52px;text-align:center;pointer-events:none;
+  box-shadow:0 0 22px rgba(127,212,232,.22)}
+.cw-arrow.right{right:8px}
+.cw-arrow.left{left:8px}
+.cw-arrow.on{display:block;animation:cwArrow 1.6s ease-in-out infinite}
+@keyframes cwArrow{0%,100%{opacity:.45}50%{opacity:1}}
+
 </style>
 </head>
 <body>
@@ -1207,13 +1216,35 @@ section[id]{scroll-margin-top:96px}
       elLayer=d.getElementById('cwLayer'), elFade=d.getElementById('cwFade'), elBubble=d.getElementById('cwBubble'),
       elFly=d.getElementById('cwCwFly'), elFx=d.getElementById('cwFx'), elChips=d.getElementById('cwChips'),
       elBill=d.getElementById('cwBill'), elFound=d.getElementById('cwFound'), elBar=d.getElementById('cwBar'),
-      elTotal=d.getElementById('cwTotal');
+      elTotal=d.getElementById('cwTotal'), elArrow=d.getElementById('cwArrow'), elOpenBtn=d.getElementById('cwOpen');
   var cwPos=0, cwDrag=false, cwSx=0, cwSp=0, cwState=cwFound();
 
   function cwImgW(){ return elPan.offsetWidth; }
   function cwMax(){ return Math.max(0, cwImgW()-elRoom.clientWidth); }
   function cwClamp(v){ return Math.min(0,Math.max(-cwMax(),v)); }
-  function cwApply(){ elPan.style.transform='translate3d('+cwPos.toFixed(1)+'px,0,0)'; if(elRoom.scrollLeft) elRoom.scrollLeft=0; }
+  function cwApply(){
+    elPan.style.transform='translate3d('+cwPos.toFixed(1)+'px,0,0)';
+    if(elRoom.scrollLeft) elRoom.scrollLeft=0;
+    cwEdgeHint();
+  }
+  /* если шкаф спрятан или предмет не найден — он за краем кадра: показываем стрелку */
+  function cwEdgeHint(){
+    if(!elArrow) return;
+    var R=CW_ROOMS[cwRoom], W=elRoom.clientWidth, right=0, left=0;
+    (R.containers||[]).forEach(function(ct){
+      var cx=cwImgW()*ct.x/100+cwPos;
+      if(cx<30) left=1; else if(cx>W-30) right=1;
+    });
+    if(!right && !left){
+      (R.items||[]).forEach(function(f){
+        if(cwState[f.id]) return;
+        var cx=cwImgW()*f.x/100+cwPos;
+        if(cx<20) left=1; else if(cx>W-20) right=1;
+      });
+    }
+    elArrow.className='cw-arrow'+(right?' right on':'')+(left?' left on':'');
+    elArrow.textContent=(right&&left)?'↔':(left?'←':'→');
+  }
   function cwMoney(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' ₽'; }
 
   function cwScore(){
@@ -1285,6 +1316,12 @@ section[id]{scroll-margin-top:96px}
       elLayer.appendChild(el);
     });
     d.getElementById('cwWhere').textContent=R.name;
+    var ob=d.getElementById('cwOpen');
+    if(ob){
+      var hasC=(R.containers&&R.containers.length);
+      ob.textContent=hasC?('Открыть '+(R.containers[0].label||'шкаф').toLowerCase()):'Тут пусто';
+      ob.style.display=hasC?'':'none';
+    }
     cwChips(); cwScore();
     var sync=function(){
       var f=R.focus||0.4;
@@ -1415,6 +1452,17 @@ section[id]{scroll-margin-top:96px}
     d.getElementById('cwVisit').textContent=(cwVisit<10?'0':'')+cwVisit;
     cwBuild();
     cwSay(cwVisit===2? 'Второй раз зашёл. А на месте уже не то, что в первый.' : 'Визит '+cwVisit+'. Всё то же место, но ты уже другой.');
+  };
+  d.getElementById('cwOpen').onclick=function(){
+    var R=CW_ROOMS[cwRoom], cts=R.containers||[];
+    if(!cts.length){ cwSay('Здесь нечего открывать.'); return; }
+    var ct=cts[0];
+    cwPos=cwClamp(-(cwImgW()*ct.x/100-elRoom.clientWidth/2)); cwApply();
+    setTimeout(function(){
+      var el=elLayer.querySelector('.cw-cont');
+      if(el && !el.classList.contains('opened')) el.click();
+      else { var it=ct.item; cwSay('Уже открыто. '+it.names[0]+' — твой.',false,it.names[0]); }
+    },420);
   };
   d.getElementById('cwReset').onclick=function(){
     cwState={}; cwSaveFound(cwState); cwBuild();
