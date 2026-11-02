@@ -688,6 +688,8 @@ section[id]{scroll-margin-top:96px}
 .cw-arrow.left{left:8px}
 .cw-arrow.on{display:block;animation:cwArrow 1.6s ease-in-out infinite}
 @keyframes cwArrow{0%,100%{opacity:.45}50%{opacity:1}}
+/* секция «Клиника» начинается сразу — игра должна быть в кадре при переходе по меню */
+#clinic{padding-top:clamp(20px,2.6vw,38px)}
 
 </style>
 </head>
@@ -761,12 +763,6 @@ section[id]{scroll-margin-top:96px}
 <!-- ================= КЛИНИКА ================= -->
 <section id="clinic">
   <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Психиатрическая клиника</div>
-      <h2>Протокол приёма</h2>
-      <p class="lead">Клиника принимает пациентов со всеми существующими диагнозами. Главное условие, чтобы попасть к нам — наличие диагноза «лох».</p>
-    </div>
-
 <!-- ================= ОСМОТР КЛИНИКИ (интерактив) ================= -->
 <!-- ================= ОСМОТР КЛИНИКИ (интерактив) ================= -->
 <div class="cw-wrap" id="cwRoot">
@@ -774,7 +770,7 @@ section[id]{scroll-margin-top:96px}
     <div class="cw-headl">
       <span class="cw-kicker">Осмотр · интерактивно</span>
       <h3 class="cw-h3">Погоди по клинике</h3>
-      <p class="cw-lead">Коридоры, палаты и кабинет. Предметы на местах меняются — в зависимости от того, какой ты сегодня пациент.</p>
+      <p class="cw-lead">Коридоры, палаты, кабинет. Предметы меняются — в зависимости от того, какой ты сегодня пациент.</p>
     </div>
     <div class="cw-meta">
       <span class="cw-visitnum" id="cwVisit">01</span>
@@ -819,6 +815,15 @@ section[id]{scroll-margin-top:96px}
     <button class="cw-btn cw-ghost" id="cwReset">Начать заново</button>
   </div>
 </div>
+
+</div>
+    <div class="sec-head rv">
+      <div class="eyebrow">Психиатрическая клиника</div>
+      <h2>Протокол приёма</h2>
+      <p class="lead">Клиника принимает пациентов со всеми существующими диагнозами. Главное условие, чтобы попасть к нам — наличие диагноза «лох».</p>
+    </div>
+
+<!-- ================= ОСМОТР КЛИНИКИ (интерактив) ================= -->
 
 </div>
 </div>
